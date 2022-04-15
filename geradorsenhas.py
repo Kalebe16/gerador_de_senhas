@@ -37,15 +37,16 @@ def salvar_senha(senha, values):
         arquivo.write(f"\nSite: {values['-SITE-']} \nUsuario: {values['-USUARIO-']} \nSenha: {senha}\n")
     print("Arquivo salvo")
 
+
 def player_musica():
     if count == 1:
-        pygame.mixer.music.play(loops=-1) # toca a musica e a repete infinitamente
+        pygame.mixer.music.play(loops=-1)  # toca a musica e a repete infinitamente
     elif count % 2 == 0:
-        pygame.mixer.music.pause() # pausa a musica temporariamente
-    elif count % 2 != 0:
-        pygame.mixer.music.unpause() # retoma a musica de onde tinha parado
-    
-        
+        pygame.mixer.music.pause()  # pausa a musica temporariamente
+    else:
+        pygame.mixer.music.unpause()  # retoma a musica de onde tinha parado
+
+
 janela = criar_janela()
 
 while True:
