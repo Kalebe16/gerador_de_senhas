@@ -1,9 +1,9 @@
 import PySimpleGUI as sg
 import random
 import pygame
+
 pygame.mixer.init()
 pygame.mixer.music.load('musica.mp3')
-
 
 tema = "DarkAmber"
 count = 0
@@ -11,26 +11,48 @@ count = 0
 
 def criar_janela():
     sg.theme(tema)
-    
 
     layout = [
-        [sg.Text("Site/Software:", size=(10, 1)), sg.Input("", key="-SITE-", size=(20, 1))],
-        [sg.Text("Usuario/Email:", size=(10, 1)), sg.Input("", key="-USUARIO-", size=(20, 1))],
-        [sg.Text("Quantidade de caracteres:"), sg.Combo(values=list(range(30)), key="-TOTALCARACTERES-", default_value="1", size=(3, 1))],           
+        [
+            sg.Text("Site/Software:", size=(10, 1)),
+            sg.Input("", key="-SITE-", size=(20, 1))
+        ],
+        [
+            sg.Text("Usuario/Email:", size=(10, 1)),
+            sg.Input("", key="-USUARIO-", size=(20, 1))
+        ],
+        [
+            sg.Text("Quantidade de caracteres:"),
+            sg.Combo(
+                values=list(range(30)),
+                key="-TOTALCARACTERES-",
+                default_value="1",
+                size=(3, 1)
+            )
+        ],
         [sg.Output(size=(32, 5))],
-        [sg.Button("Gerar Senha"), sg.Button("Salvar Senha"), sg.Button(image_filename=r"imgautofalante.png", image_size=(24, 24), key="-MUSICA-")]
+        [
+            sg.Button("Gerar Senha"),
+            sg.Button("Salvar Senha"),
+            sg.Button(
+                image_filename=r"imgautofalante.png",
+                image_size=(24, 24),
+                key="-MUSICA-"
+            )
+        ]
     ]
-    
+
     return sg.Window("Senhas Fortes", layout=layout, finalize=True, element_justification="center")
 
 
 def criar_senha(values):
     lista_caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%"
-    caracteres = random.choices(lista_caracteres, k=int(values["-TOTALCARACTERES-"])) 
-    nova_senha = ''.join(caracteres) 
+    caracteres = random.choices(lista_caracteres, k=int(values["-TOTALCARACTERES-"]))
+    nova_senha = ''.join(caracteres)
+
     return nova_senha
-    
-    
+
+
 def salvar_senha(senha, values):
     with open("senhas.txt", "a", newline="") as arquivo:
         arquivo.write(f"\nSite: {values['-SITE-']} \nUsuario: {values['-USUARIO-']} \nSenha: {senha}\n")
