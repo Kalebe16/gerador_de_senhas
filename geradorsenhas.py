@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
 import random
-import os
 import pygame
 pygame.mixer.init()
 pygame.mixer.music.load('musica.mp3')
