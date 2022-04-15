@@ -50,16 +50,17 @@ janela = criar_janela()
 
 while True:
     window, event, values = sg.read_all_windows(timeout=1)
-    
-    
-    if window == janela and event == sg.WIN_CLOSED:
+
+    if window != janela:
+        continue
+
+    if event == sg.WIN_CLOSED:
         break
-    if window == janela and event == "Gerar Senha": 
+    if event == "Gerar Senha":
         senha = criar_senha(values)
         print(senha)
-    if window == janela and event == "Salvar Senha":
+    if event == "Salvar Senha":
         salvar_senha(senha, values)
-    if window == janela and event == "-MUSICA-":
+    if event == "-MUSICA-":
         count += 1
         player_musica()
-        
